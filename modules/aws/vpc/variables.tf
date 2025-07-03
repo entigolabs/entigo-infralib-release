@@ -150,8 +150,20 @@ variable "create_gateway_s3" {
   default  = true
 }
 
+variable "create_endpoint_s3" {
+  type     = bool
+  nullable = false
+  default  = false
+}
+
 variable "create_endpoint_ecr" {
   type     = bool
   nullable = false
   default  = false
+}
+
+variable "endpoints_sg_extra_rules" {
+  type     = list(string)
+  nullable = false
+  default  = []
 }
