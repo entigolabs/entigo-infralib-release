@@ -7,13 +7,13 @@ metadata:
     helm.sh/resource-policy: keep
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
-  package: {{ .Values.global.registry }}/entigolabs/provider-family-aws:v1.23.1
+  package: {{ .Values.global.registry }}/entigolabs/provider-family-aws:v2.0.2
   #capabilities:
   #- safe-start
   runtimeConfigRef:
     name: {{ .Release.Name }}
 
-{{- $providers := list "iam" "s3" "sqs" "ecr" "rds" "kms" "secretsmanager" "ec2" -}}
+{{- $providers := list "iam" "s3" "sqs" "ecr" -}}
 {{- range $index, $provider := $providers }}
 ---
 apiVersion: pkg.crossplane.io/v1
@@ -26,7 +26,7 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   skipDependencyResolution: true
-  package: {{ $.Values.global.registry }}/entigolabs/provider-aws-{{ $provider }}:v1.23.1
+  package: {{ $.Values.global.registry }}/entigolabs/provider-aws-{{ $provider }}:v2.0.2
   #capabilities:
   #- safe-start
   runtimeConfigRef:
@@ -47,7 +47,7 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   skipDependencyResolution: true
-  package: {{ $.Values.global.registry }}/entigolabs/provider-aws-{{ $provider }}:v1.23.1
+  package: {{ $.Values.global.registry }}/entigolabs/provider-aws-{{ $provider }}:v2.0.2
   #capabilities:
   #- safe-start
   runtimeConfigRef:
